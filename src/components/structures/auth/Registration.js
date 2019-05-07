@@ -473,15 +473,28 @@ module.exports = React.createClass({
                 { _t('Go back') }
             </a>;
         }
+        let data;
+        if (this.state.hsUrl === "https://poddery.com") {
+            data = <div>
+            { this.renderServerComponent() }
+            <h2>Register through Diaspora*</h2>
+            <p>Use the <a href="https://poddery.com/users/sign_up" _target="_blank">Diaspora Registration Page </a>
+            to register for both Matrix and Diaspora!
+            </p>
+            </div>
+        } else {
+            data = <div>
+            { errorText }
+            { this.renderRegisterComponent() }
+            </div>
+        }
 
         return (
             <AuthPage>
                 <AuthHeader />
                 <AuthBody>
                     <h2>{ _t('Create your account') }</h2>
-                    { errorText }
-                    { this.renderServerComponent() }
-                    { this.renderRegisterComponent() }
+                    { data }
                     { goBack }
                     { signIn }
                 </AuthBody>
